@@ -32,7 +32,7 @@
 
 
 
-//___________________PART 2  _________________________
+//___________________PART 2  Expanding Functionality_________________________
 
 // Declare a variable that stores the number of columns in each row of data within the CSV.
 // let string = `ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26`
@@ -59,7 +59,7 @@
 // console.log(rows);
 
 
-// ________________PARTE 3 ________________________
+// ________________PART 3 Transforming Data ________________________
 
 // For each row of data in the result array produced by your code above, 
 //create an object where the key of each value is the heading for that value’s column.
@@ -70,7 +70,7 @@ let list = [
   [ '63', 'Blaine', 'Quiz Master', '58' ],
   [ '98', 'Bill', 'Doctor’s Assistant', '26' ]
 ];
-// Convert these keys to all lowercase letters for consistency.
+// // Convert these keys to all lowercase letters for consistency.
 let headers = list[0].map(header => header.toLowerCase());
 // Store these objects in an array, in the order that they were originally listed.
 let objects = [];
@@ -87,3 +87,47 @@ for(let i = 1; i < list.length; i++){
 }
 
 console.log(objects);
+
+
+//_____________PART 4 : Sorting and Manipulating Data______________
+
+//Remove the last element from the sorted array.
+list.pop();
+// Insert the following object at index 1:
+list.splice(1, 0, { id: "48", name: "Barry", occupation: "Runner", age: "25"});
+
+
+
+// Add the following object to the end of the array:
+list.push({ id: "7", name: "Bilbo", occupation: "None", age: "111" });
+
+let group_age = 0;
+let count = 0;
+
+for (let item of list){
+    if (typeof item === 'object' && !Array.isArray(item) && item.age){
+        group_age += parseInt(item.age);
+        count++;
+    }
+}
+
+let average_age = group_age / count;
+
+console.log(list);
+console.log(`Average age :`, average_age);
+
+
+
+// _____________PART 5  ________________
+
+let csv_format = list[0].join(",") + "\n";
+
+for (let item of list.slice(1)){
+    if (Array.isArray(item)){
+        csv_format += item.join(",") + "\n";
+    }else {
+        csv_format += `${item.id},${item.name},${item.occupation},${item.age}\n`;
+    }
+}
+
+console.log(csv_format)
